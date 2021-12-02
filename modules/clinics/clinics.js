@@ -4,10 +4,11 @@ module.exports = {
         try{
             const { ClinicName,ClinicAdres,ClinicPhone,ClinicRate } = req.body;
             const newClinic = await model.newClinic(ClinicName,ClinicAdres,ClinicPhone,ClinicRate);
-            console.log('hello');
-            console.log(req.body);
-            console.log(newClinic);
-            res.status(200).json(newClinic)
+            if(newClinic){
+                res.status(200).json(newClinic)
+            }else{
+                res.status(400).json({message:'Failed ...'})
+            }
 
         }catch(err){
             console.log(err);
@@ -16,7 +17,11 @@ module.exports = {
     ALL_CLINICS:async(_,res)=>{
         try{
             const clinics = await model.allClinics();
-            res.status(200).json(clinics )
+            if(clinics){
+                res.status(200).json(clinics )
+            }else{
+                res.status(400).json({message:'Failed ...'})
+            }
 
         }catch(err){
             console.log(err);

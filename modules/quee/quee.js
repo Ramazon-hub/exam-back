@@ -9,11 +9,21 @@ module.exports = {
             const newQuee = await model.newQuee(jwt.verify(userId),userPhone,clinicId,categoryId)
             if(newQuee){
                 res.status(200).json({messege:'ok',count:queeCount.count})
-                console.log({messege:'ok',count:queeCount.count});
 
             }else{
                 res.status(400).res.json({message:'values invalid'})
             }
+        }catch(err){
+            console.log(err);
+        }
+    },
+    ALL_QUEES:async(req,res)=>{
+        try{
+            const { token } =req.headers
+            const userId = jwt.verify(token)
+            const quees = await model.allQuees(userId);
+            res.status(200).json(quees)
+
         }catch(err){
             console.log(err);
         }

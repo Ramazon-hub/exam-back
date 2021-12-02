@@ -12,7 +12,11 @@ module.exports ={
     ALL_CATEGORIES:async(_,res)=>{
         try{
             const allcategories = await model.allcategories();
-            res.status(200).json(allcategories)
+            if(allcategories){
+                res.status(200).json(allcategories)
+            }else{
+                res.status(400).json({message:'Failed ...'})
+            }
 
         }catch(err){
             console.log(err);

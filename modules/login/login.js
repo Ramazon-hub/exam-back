@@ -4,9 +4,7 @@ module.exports ={
     LOGIN:async(req,res)=>{
         try{
             const { uName,password } = req.body
-            console.log(uName,password );
             const findUser = await model.login(uName,password);
-            console.log(findUser);
             if(findUser){
                 const token = jwt.sign(findUser.user_id)
                 const position = findUser.clinic_id ?'admin' :'user' 
