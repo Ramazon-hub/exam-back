@@ -30,7 +30,7 @@ create table users(
 create table quee(
     quee_id uuid default uuid_generate_v4() primary key,
     user_id uuid,
-    user_phone text [],
+    user_phone text not null,
     clinic_id uuid,
     category_id uuid,
     created_at timestamptz default current_timestamp,

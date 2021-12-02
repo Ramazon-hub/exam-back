@@ -1,5 +1,4 @@
 const model = require('./model')
-const categoryModel = require('../category/model')
 module.exports = {
     NEW_CLINIC:async(req,res)=>{
         try{
@@ -17,8 +16,7 @@ module.exports = {
     ALL_CLINICS:async(_,res)=>{
         try{
             const clinics = await model.allClinics();
-            const categories = await categoryModel.allcategories()
-            res.status(200).json( {clinics,categories} )
+            res.status(200).json(clinics )
 
         }catch(err){
             console.log(err);

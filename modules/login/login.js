@@ -6,11 +6,11 @@ module.exports ={
             const { uName,password } = req.body
             console.log(uName,password );
             const findUser = await model.login(uName,password);
-            // const allUsers = await model.allUsers();
-            // const findUser = allUsers.find(u=>u.user_name && u.password)
+            console.log(findUser);
             if(findUser){
-                const token = jwt.sign({user_id:findUser.user_id,clinic_id:findUser.clinic_id})
-                res.status(200).json({token})
+                const token = jwt.sign(findUser.user_id)
+                const position = findUser.clinic_id ?'admin' :'user' 
+                res.status(200).json({token,position})
 
             }else{
                 res.status(400).json({m:'username or password is invalid'})
